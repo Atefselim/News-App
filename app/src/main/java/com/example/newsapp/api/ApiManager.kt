@@ -12,6 +12,8 @@ import retrofit2.converter.gson.GsonConverterFactory
      private val httpLoggingInterceptor = HttpLoggingInterceptor{message->
 
          Log.e("Api",message )
+     }.apply {
+         level = HttpLoggingInterceptor.Level.BODY
      }
      private val okHttpClient = OkHttpClient.Builder()
          .addInterceptor(httpLoggingInterceptor)
