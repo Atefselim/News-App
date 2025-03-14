@@ -231,19 +231,19 @@ fun NewsScreenContent() {
         }
     }
 
-    Scaffold(
-        topBar = {
-            NewsToolbar(title = "General", onSearchClick = { showSearch.value = true })
-        }, containerColor = Color.Black
-    ) { paddingValues ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
-        ) {
-            if (showSearch.value) {
-                SearchScreen(onClose = { showSearch.value = false }, newsList = newsListState)
-            } else {
+    if (showSearch.value) {
+        SearchScreen(onClose = { showSearch.value = false }, newsList = newsListState)
+    } else {
+        Scaffold(
+            topBar = {
+                NewsToolbar(title = "General", onSearchClick = { showSearch.value = true })
+            }, containerColor = Color.Black
+        ) { paddingValues ->
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues)
+            ) {
                 SourcesTabRow(
                     sourcesList = sourcesListState,
                     modifier = Modifier.padding(bottom = 8.dp)
@@ -256,6 +256,7 @@ fun NewsScreenContent() {
         }
     }
 }
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NewsBottomSheetDialog(
